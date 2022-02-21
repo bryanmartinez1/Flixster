@@ -32,6 +32,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     RatingBar ratingBar;
     YouTubePlayerView youTubePlayerView;
     TextView releaseDate;
+    TextView popularity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         ratingBar = findViewById(R.id.ratingBar);
         youTubePlayerView = findViewById(R.id.player);
         releaseDate = findViewById(R.id.releaseDate);
+        popularity = findViewById(R.id.popularity);
 
 
         Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
@@ -50,6 +52,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvOverview.setText(movie.getOverview());
         ratingBar.setRating((float)movie.getRating());
         releaseDate.setText("Released: " + movie.getReleased());
+        popularity.setText("Popularity: " + movie.getPopularity());
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(String.format(VIDEOS_URL, movie.getMovieID()), new JsonHttpResponseHandler() {
@@ -80,13 +83,13 @@ public class DetailActivity extends YouTubeBaseActivity {
         youTubePlayerView.initialize(YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                Log.d("DetailActicity", "onInitializationSuccess");
+                Log.d("DetailActivity", "onInitializationSuccess");
                 youTubePlayer.cueVideo(youtubeKey);
             }
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                Log.d("DetailActicity", "onInitializationFailure");
+                Log.d("DetailActivity", "onInitializationFailure");
             }
         });
     }

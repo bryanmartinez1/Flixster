@@ -38,6 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Released: 2022/2/4" />
+    <TextView
+        android:id="@+id/popularity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="483.983" />
 
     <TextView
         android:id="@+id/tvOverview"
